@@ -20,6 +20,9 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton mPrevButton;
     private TextView mQuestionTextView;
 
+    private int noOfCorrectAnswers = 0;
+    private int noOfQuestionsAnswered = 0;
+
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true, false),
             new Question(R.string.question_oceans, true, false),
@@ -28,6 +31,8 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_americas, true, false),
             new Question(R.string.question_asia, true, false)
     };
+
+    private int noOfQuestions = mQuestionBank.length;
 
     private int mCurrentIndex = 0;
 
@@ -132,12 +137,12 @@ public class QuizActivity extends AppCompatActivity {
 
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
-        if (!mQuestionBank[mCurrentIndex].questionIsAnswered()) {
-            mTrueButton.setEnabled(true);
-            mFalseButton.setEnabled(true);
-        } else {
+        if (mQuestionBank[mCurrentIndex].questionIsAnswered()) {
             mTrueButton.setEnabled(false);
             mFalseButton.setEnabled(false);
+        } else {
+            mTrueButton.setEnabled(true);
+            mFalseButton.setEnabled(true);
         }
         mQuestionTextView.setText(question);
     }
@@ -155,10 +160,22 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.correct_toast;
+            noOfCorrectAnswers += 1;
         } else {
             messageResId = R.string.incorrect_toast;
         }
 
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+        noOfQuestionsAnswered += 1;
+
+        if (noOfQuestionsAnswered == noOfQuestions) {
+            double percentage = ((double) noOfCorrectAnswers / noOfQuestions) * 100;
+
+            Toast.makeText(this, "You got " + String.valueOf(Math.round(percentage)) + "% correct!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 }
