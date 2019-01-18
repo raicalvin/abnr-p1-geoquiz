@@ -4,10 +4,12 @@ public class Question {
 
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mQuestionAnswered;
 
-    public Question(int textResId, boolean answerTrue) {
+    public Question(int textResId, boolean answerTrue, boolean questionAnswered) {
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        mQuestionAnswered = questionAnswered;
     }
 
     public int getTextResId() {
@@ -24,5 +26,13 @@ public class Question {
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
+    }
+
+    public void setQuestionAnswered(boolean answered) {
+        mQuestionAnswered = answered;
+    }
+
+    public boolean questionIsAnswered() {
+        return mQuestionAnswered;
     }
 }
