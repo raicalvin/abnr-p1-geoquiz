@@ -136,7 +136,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        Log.d(TAG, "Updating Question Text", new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         if (mQuestionBank[mCurrentIndex].questionIsAnswered()) {
             mTrueButton.setEnabled(false);
