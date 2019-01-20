@@ -76,7 +76,7 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                // mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion(); // Update question every time Next button is clicked
             }
         });
@@ -136,6 +136,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
+        Log.d(TAG, "Updating Question Text", new Exception());
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         if (mQuestionBank[mCurrentIndex].questionIsAnswered()) {
             mTrueButton.setEnabled(false);
